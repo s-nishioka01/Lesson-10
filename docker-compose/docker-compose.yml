@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  db:
+    build: .
+    platform: linux/x86_64
+    container_name: app_db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DOCKER_DATASOURCE_PASSWORD}
+      MYSQL_DATABASE: user_list
+      MYSQL_USER: user
+      MYSQL_PASSWORD: ${DOCKER_DATASOURCE_PASSWORD}
+    ports:
+      - 3307:3306
+    volumes:
+      - $PWD/sql:/docker-entrypoint-initdb.d

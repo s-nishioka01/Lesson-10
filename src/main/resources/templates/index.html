@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Lesson-10</title>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="main">
+		<div class="title">
+			<h1>ユーザーリスト</h1>
+		</div>
+		<div class="error-message">
+			<p th:text="${error}"></p>
+		</div>
+		<div class="table-section">
+			<table class="user-table">
+				<tr>
+					<th>ID</th>
+					<th>名前</th>
+					<th>編集</th>
+				</tr>
+				<tr th:each="user:${userList}">
+					<td th:text="${user.id}" class="user-id"></td>
+					<td th:text="${user.name}" class="user-name"></td>
+					<td class="user-table-edit">
+						<div class="btn update-link-btn">
+							<a th:href="@{'/update/' + ${user.id}}" >編集</a>
+						</div>
+						<div class="btn delete-link-btn">
+							<a th:href="@{'/delete/' + ${user.id}}" >削除</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="btn create-link-btn">
+			<a href="/new">新規登録</a>
+		</div>
+	</div>
+</body>
+</html>

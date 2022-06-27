@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>削除確認</title>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="main">
+		<div class="confirm-delete-message">
+			<p>以下の購入記録を削除しますか？</p>
+		</div>
+		<table class="purchase-table delete-table">
+			<tr>
+				<th>ID</th>
+				<th>名前</th>
+			</tr>
+			<tr>
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.name}"></td>
+			</tr>
+		</table>
+		<div class="delete-form">
+			<form method="post" th:action="@{/delete/} + ${user.id}">
+				<input type="submit" value="削除">
+			</form>
+		</div>
+		<div class="cancel-btn">
+			<a href="/index">キャンセル</a>
+		</div>
+	</div>
+</body>
+</html>

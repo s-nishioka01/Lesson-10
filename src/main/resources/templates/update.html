@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>編集</title>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="main">
+		<div class="crud-form update-form">
+			<h2>編集フォーム</h2>
+			<ul class="validation-message" th:if="${validationError}" th:each="error: ${validationError}">
+				<li th:text="${error}"></li>
+			</ul>
+			<form method="post" th:object="${user}" th:action="@{/update/} + ${user.id}">
+				<p>名前</p>
+				<input type="text" th:field="*{name}">
+				<div class="submit-btn">
+					<input type="submit" value="変更">
+				</div>
+			</form>
+		</div>
+		<div class="cancel-btn">
+			<a href="/index">キャンセル</a>
+		</div>
+	</div>
+</body>
+</html>
