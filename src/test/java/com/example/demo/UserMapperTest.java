@@ -3,6 +3,7 @@ package com.example.demo;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ class UserMapperTest {
 	@DataSet("users.yml")
 	void 選択したユーザーが取得できること() {
 		User actual = userMapper.findOne(1).get();
-		assertEquals("1", actual.getId());
+		assertEquals(1, actual.getId());
 		assertEquals("Harry Potter", actual.getName());
 	}
 
@@ -44,8 +45,10 @@ class UserMapperTest {
 	void ユーザーの新規登録ができること() {
 		UserForm user = new UserForm(4, "Draco Malfoy");
 		userMapper.save(user);
-		User actual = userMapper.findOne(4).get();
-		assertEquals(4, actual.getId());
+		System.out.println(user.getId());
+		Optional<User> userActual = userMapper.findOne(user.getId());
+		User actual = userActual.get();
+		assertEquals(user.getId(), actual.getId());
 		assertEquals("Draco Malfoy", actual.getName());
 		assertEquals(4, userMapper.findAll().size());
 	}
