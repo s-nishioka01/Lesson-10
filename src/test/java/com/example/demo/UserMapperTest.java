@@ -14,6 +14,7 @@ import com.example.demo.mapper.UserMapper;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 
 @SpringBootTest
@@ -41,6 +42,7 @@ class UserMapperTest {
 
 	@Test
 	@DataSet("users.yml")
+	@ExpectedDataSet(value = "expectedUsers.yml", ignoreCols = "id")
 	void ユーザーの新規登録ができること() {
 		UserForm user = new UserForm(4, "Draco Malfoy");
 		userMapper.save(user);
