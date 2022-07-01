@@ -11,15 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.demo.entity.User;
 import com.example.demo.form.UserForm;
 import com.example.demo.mapper.UserMapper;
-import com.github.database.rider.core.api.configuration.DBUnit;
-import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 
 @SpringBootTest
 @DBRider
-@DBUnit(caseInsensitiveStrategy = Orthography.LOWERCASE)
 class UserMapperTest {
 
 	@Autowired
@@ -42,7 +39,7 @@ class UserMapperTest {
 
 	@Test
 	@DataSet("users.yml")
-	@ExpectedDataSet(value = "expectedUsers.yml", ignoreCols = "id")
+	@ExpectedDataSet(value = "expectedNew.yml", ignoreCols = "id")
 	void ユーザーの新規登録ができること() {
 		UserForm user = new UserForm(4, "Draco Malfoy");
 		userMapper.save(user);
@@ -54,6 +51,7 @@ class UserMapperTest {
 
 	@Test
 	@DataSet("users.yml")
+	@ExpectedDataSet(value = "expectedEdit.yml", ignoreCols = "id")
 	void ユーザーの編集ができること() {
 		UserForm user = new UserForm(1, "Albus Dumbledore");
 		userMapper.update(user);
@@ -64,6 +62,7 @@ class UserMapperTest {
 
 	@Test
 	@DataSet("users.yml")
+	@ExpectedDataSet(value = "expectedDelete.yml", ignoreCols = "id")
 	void ユーザーの削除ができること() {
 		userMapper.delete(1);
 		List<User> actual = userMapper.findAll();
