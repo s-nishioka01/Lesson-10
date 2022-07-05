@@ -1,10 +1,9 @@
 users:
   - id: 1
-    name: "Harry Potter"
+    name: 'Harry Potter'
   - id: 2
-    name: "Ron Weasley"
+    name: 'Ron Weasley'
   - id: 3
-    name: "Hermione Granger"
+    name: 'Hermione Granger'
   - id: 4
-    name: "Draco Malfoy"
-    
+    name: 'Draco Malfoy'
