@@ -42,7 +42,7 @@ class UserMapperTest {
 
 	@Test
 	@DataSet(value = "users.yml")
-	@ExpectedDataSet(value = "expectedNew	.yml", ignoreCols = "id")
+	@ExpectedDataSet(value = "expectedNew.yml", ignoreCols = "id")
 	void ユーザーの新規登録ができること() {
 		UserForm user = new UserForm(4, "Draco Malfoy");
 		userMapper.save(user);
