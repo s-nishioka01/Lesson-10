@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.User;
@@ -15,8 +17,9 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 
-@SpringBootTest
 @DBRider
+@MybatisTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserMapperTest {
 
 	@Autowired
@@ -38,15 +41,11 @@ class UserMapperTest {
 	}
 
 	@Test
-	@DataSet("users.yml")
+	@DataSet(value = "users.yml")
 	@ExpectedDataSet(value = "expectedNew.yml", ignoreCols = "id")
 	void ユーザーの新規登録ができること() {
 		UserForm user = new UserForm(4, "Draco Malfoy");
 		userMapper.save(user);
-		User actual = userMapper.findOne(user.getId()).orElseThrow(AssertionError::new);
-		assertEquals(user.getId(), actual.getId());
-		assertEquals("Draco Malfoy", actual.getName());
-		assertEquals(4, userMapper.findAll().size());
 	}
 
 	@Test
