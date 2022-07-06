@@ -1,0 +1,7 @@
+users:
+  - id: 1
+    name: "Albus Dumbledore"
+  - id: 2
+    name: "Ron Weasley"
+  - id: 3
+    name: "Hermione Granger"
